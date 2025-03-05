@@ -33,12 +33,13 @@ module.exports = {
 
     // React specific
     'react/prop-types': 'error',
-    'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
     'react/no-deprecated': 'error',
     'react/no-direct-mutation-state': 'error',
     'react/jsx-key': ['error', { checkFragmentShorthand: true }],
     'react/self-closing-comp': 'error',
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-uses-react': 'off',
     'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
 
     // React hooks
@@ -83,7 +84,6 @@ module.exports = {
         ],
         '@typescript-eslint/no-explicit-any': 'warn',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
-        '@typescript-eslint/ban-ts-comment': 'warn',
         'no-unused-vars': 'off', // Turned off in favor of @typescript-eslint/no-unused-vars
       },
     },
