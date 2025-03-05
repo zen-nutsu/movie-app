@@ -1,0 +1,31 @@
+# Build files
+dist/
+build/
+*.bundle.js
+
+# Node modules
+node_modules/
+
+# Expo
+.expo/
+.expo-shared/
+web-build/
+
+# Environment and config
+.env
+.env.*
+*.config.js
+metro.config.js
+babel.config.js
+jest.config.js
+
+# Generated files
+*.generated.*
+**/codegen/**
+
+# Third party code you don't want to lint
+**/vendor/**
+
+# Lock files
+yarn.lock
+package-lock.json
