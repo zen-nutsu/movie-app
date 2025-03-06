@@ -1,3 +1,9 @@
+import {
+  GoogleSignin,
+  isErrorWithCode,
+  isSuccessResponse,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import React from 'react';
 import {
   Image,
@@ -11,9 +17,45 @@ import {
 import colors from '../global/colors';
 
 export default function LoginWithGoogleButton({ style }: { style?: StyleProp<ViewStyle> }) {
+  GoogleSignin?.configure({
+    scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+    webClientId: '782479739815-1kb26evefmt2kr89cgorsc69ruf4jnc2.apps.googleusercontent.com',
+  });
+
   const { width } = useWindowDimensions();
+
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      await GoogleSignin.signOut();
+      const response = await GoogleSignin.signIn();
+      if (isSuccessResponse(response)) {
+        // We are getting the JWT and the user info we can use supabase or our backend as well
+        //TODO: signed in successfully
+      } else {
+        //TODO: sign in was cancelled by user
+      }
+    } catch (error) {
+      if (isErrorWithCode(error)) {
+        switch (error.code) {
+          case statusCodes.IN_PROGRESS:
+            //TODO: operation (eg. sign in) already in progress
+            break;
+          case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+            //TODO: Android only, play services not available or outdated
+            break;
+          default:
+          //TODO: some other error happened
+        }
+      } else {
+        //TODO: an error that's not related to google sign in occurred
+      }
+    }
+  };
+
   return (
     <TouchableOpacity
+      onPress={signIn}
       style={{
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ...(style as any),
