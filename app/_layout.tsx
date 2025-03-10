@@ -30,7 +30,9 @@ export default function RootLayout() {
         screenOptions={{
           headerShown: false,
         }}
-      />
+      >
+        <Stack.Screen name="(tabs)" />
+      </Stack>
       <StatusBar animated backgroundColor={colors.backgroundColor(theme)} />
     </View>
   );
