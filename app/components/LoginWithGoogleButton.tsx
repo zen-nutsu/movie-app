@@ -4,6 +4,7 @@ import {
   isSuccessResponse,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import { router } from 'expo-router';
 import React from 'react';
 import {
   Image,
@@ -26,6 +27,9 @@ export default function LoginWithGoogleButton({ style }: { style?: StyleProp<Vie
 
   const signIn = async () => {
     try {
+      //TODO: We are currently just moving to the home tab we should add our logic here
+      router.replace('/(tabs)/home');
+      return;
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signOut();
       const response = await GoogleSignin.signIn();

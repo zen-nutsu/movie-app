@@ -8,8 +8,11 @@ const colors = {
   primaryTextColor: function (scheme: string | null | undefined) {
     return scheme === 'dark' ? '#fff' : '#000';
   },
+  primaryTextDisabledColor: function (scheme: string | null | undefined) {
+    return scheme === 'dark' ? 'rgb(99, 99, 99)' : 'rgb(198, 198, 198)';
+  },
   lightTextPrimaryColor: function (scheme: string | null | undefined) {
-    return scheme === 'dark' ? 'rgb(188, 188, 188)' : 'rgb(30, 30, 30)';
+    return scheme === 'dark' ? 'rgb(160, 160, 160)' : 'rgb(30, 30, 30)';
   },
   textColor: function (scheme: string | null | undefined) {
     return scheme === 'dark' ? '#fff' : '#000';
