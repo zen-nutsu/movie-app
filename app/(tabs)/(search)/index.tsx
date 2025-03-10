@@ -1,10 +1,9 @@
 import React from 'react';
 import { Text, View, useColorScheme } from 'react-native';
 
-import colors from '../global/colors';
+import colors from '@/app/global/colors';
 
-const search = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const Search = () => {
   const theme = useColorScheme();
   return (
     <View
@@ -18,4 +17,4 @@ const search = () => {
   );
 };
 
-export default search;
+export default Search;

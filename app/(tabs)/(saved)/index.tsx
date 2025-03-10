@@ -1,10 +1,9 @@
 import React from 'react';
 import { Text, View, useColorScheme } from 'react-native';
 
-import colors from '../global/colors';
+import colors from '@/app/global/colors';
 
-const profile = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const Saved = () => {
   const theme = useColorScheme();
   return (
     <View
@@ -13,9 +12,9 @@ const profile = () => {
         backgroundColor: colors.backgroundColor(theme),
       }}
     >
-      <Text>profile</Text>
+      <Text>saved</Text>
     </View>
   );
 };
 
-export default profile;
+export default Saved;

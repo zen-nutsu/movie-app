@@ -56,7 +56,7 @@ module.exports = {
       },
     ],
     'import/no-duplicates': 'error',
-    'import/no-unresolved': 'error',
+    'import/no-unresolved': 'off',
     'import/no-useless-path-segments': 'error',
     'import/first': 'error',
     'import/newline-after-import': 'error',

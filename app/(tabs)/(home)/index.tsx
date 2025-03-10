@@ -1,10 +1,9 @@
 import React from 'react';
 import { Text, View, useColorScheme } from 'react-native';
 
-import colors from '../global/colors';
+import colors from '@/app/global/colors';
 
-const home = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const Home = () => {
   const theme = useColorScheme();
   return (
     <View
@@ -18,4 +17,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;
