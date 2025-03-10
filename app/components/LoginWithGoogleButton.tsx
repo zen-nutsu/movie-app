@@ -28,7 +28,7 @@ export default function LoginWithGoogleButton({ style }: { style?: StyleProp<Vie
   const signIn = async () => {
     try {
       //TODO: We are currently just moving to the home tab we should add our logic here
-      router.replace('/(tabs)/home');
+      router.replace('/(tabs)/(home)');
       return;
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signOut();
