@@ -2,7 +2,7 @@ const colors = {
   backgroundColor: function (scheme: string | null | undefined) {
     return scheme === 'dark' ? '#000' : '#fff';
   },
-  invertedColor: function (scheme: string | null | undefined) {
+  invertedPrimaryColor: function (scheme: string | null | undefined) {
     return scheme === 'dark' ? '#000' : '#fff';
   },
   primaryTextColor: function (scheme: string | null | undefined) {
