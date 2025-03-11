@@ -45,6 +45,7 @@ const Home = () => {
     },
   ];
 
+  // TODO: This is a custom data and need to be replaced with API call
   const customData2 = [
     {
       image:

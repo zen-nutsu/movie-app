@@ -11,7 +11,7 @@ const EachSectionMovieCard = ({
   image,
   title,
   metaInfo,
-  // This will be used in future for navigation
+  //TODO: This will be used in future for navigation
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   id,
 }: {
