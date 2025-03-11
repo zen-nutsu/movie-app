@@ -15,12 +15,8 @@ export default function TabLayout() {
         tabBarActiveTintColor: colors.primaryTextColor(theme),
         tabBarInactiveTintColor: colors.primaryTextDisabledColor(theme),
         tabBarStyle: {
-          height: 65,
           backgroundColor: colors.backgroundColor(theme),
           borderTopWidth: 0,
-        },
-        tabBarItemStyle: {
-          padding: 10,
         },
       }}
     >
