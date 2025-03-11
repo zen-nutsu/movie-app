@@ -24,12 +24,12 @@ const EachCarousel = ({
   const { width } = useWindowDimensions();
   return (
     <ImageBackground
-      key="1"
       source={{
         uri: image,
         cache: 'force-cache',
       }}
       style={{ flex: 1, justifyContent: 'flex-end' }}
+    >
     >
       <SafeAreaView
         style={{
