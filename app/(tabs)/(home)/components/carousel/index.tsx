@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { StatusBar, View, useWindowDimensions } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
@@ -13,7 +13,19 @@ export default function Carousel({
   data: { title: string; description: string; image: string; id: string; categorys: string[] }[];
 }) {
   const { height } = useWindowDimensions();
+  const ref = useRef(null);
   const [currentPosition, setCurrentPosition] = React.useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      ref?.current?.setPage((currentPosition + 1) % data.length);
+      setCurrentPosition(currentPosition => (currentPosition + 1) % data.length);
+    }, 3900);
+    return () => clearInterval(interval);
+  }, [currentPosition, data.length]);
+
   return (
     <View
       style={{
@@ -23,6 +35,7 @@ export default function Carousel({
     >
       <StatusBar hidden />
       <PagerView
+        ref={ref}
         style={{ flex: 1 }}
         initialPage={0}
         onPageSelected={e => {
