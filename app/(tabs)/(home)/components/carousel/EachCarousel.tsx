@@ -10,7 +10,7 @@ const EachCarousel = ({
   title,
   description,
   image,
-  // TODO: This will be in use not now
+  // TODO: This will be used later
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   id,
   categorys,
