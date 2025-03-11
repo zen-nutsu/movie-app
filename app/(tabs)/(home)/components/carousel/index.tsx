@@ -3,6 +3,7 @@ import { StatusBar, View, useWindowDimensions } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
 import colors from '@/app/global/colors';
+import constants from '@/app/global/constants';
 
 import EachCarousel from './EachCarousel';
 import CarouselPagination from './pagination/CarouselPagination';
@@ -10,7 +11,7 @@ import CarouselPagination from './pagination/CarouselPagination';
 export default function Carousel({
   data,
 }: {
-  data: { title: string; description: string; image: string; id: string; categorys: string[] }[];
+  data: { title: string; description: string; image: string; id: string; categories: string[] }[];
 }) {
   const { height } = useWindowDimensions();
   const ref = useRef(null);
@@ -18,11 +19,12 @@ export default function Carousel({
 
   useEffect(() => {
     const interval = setInterval(() => {
+      // Because this is coming from package that doesn't have types.
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       ref?.current?.setPage((currentPosition + 1) % data.length);
       setCurrentPosition(currentPosition => (currentPosition + 1) % data.length);
-    }, 3900);
+    }, constants.carouselTiming);
     return () => clearInterval(interval);
   }, [currentPosition, data.length]);
 
@@ -45,7 +47,7 @@ export default function Carousel({
         {data.map(item => (
           <EachCarousel
             key={item.id}
-            categorys={item.categorys}
+            categories={item.categories}
             description={item.description}
             id={item.id}
             image={item.image}

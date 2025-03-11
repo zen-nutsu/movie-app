@@ -13,13 +13,13 @@ const EachCarousel = ({
   // TODO: This will be used later
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   id,
-  categorys,
+  categories,
 }: {
   title: string;
   description: string;
   image: string;
   id: string;
-  categorys: string[];
+  categories: string[];
 }) => {
   const { width } = useWindowDimensions();
   return (
@@ -76,7 +76,7 @@ const EachCarousel = ({
               gap: 10,
             }}
           >
-            {categorys.map(category => (
+            {categories.map(category => (
               <EachCategory key={category} text={category} />
             ))}
           </View>
