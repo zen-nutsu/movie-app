@@ -30,7 +30,6 @@ const EachCarousel = ({
       }}
       style={{ flex: 1, justifyContent: 'flex-end' }}
     >
-    >
       <SafeAreaView
         style={{
           flex: 1,
