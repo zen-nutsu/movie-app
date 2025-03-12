@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { StatusBar, View, useWindowDimensions } from 'react-native';
+import { Animated, StatusBar, useWindowDimensions } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
 import colors from '@/app/global/colors';
@@ -10,8 +10,12 @@ import CarouselPagination from './pagination/CarouselPagination';
 
 export default function Carousel({
   data,
+  translateY,
+  opacity,
 }: {
   data: { title: string; description: string; image: string; id: string; categories: string[] }[];
+  translateY: Animated.AnimatedInterpolation<string | number>;
+  opacity: Animated.AnimatedInterpolation<string | number>;
 }) {
   const { height } = useWindowDimensions();
   const ref = useRef(null);
@@ -29,10 +33,12 @@ export default function Carousel({
   }, [currentPosition, data.length]);
 
   return (
-    <View
+    <Animated.View
       style={{
         height: height * 0.55,
         backgroundColor: colors.black,
+        transform: [{ translateY }],
+        opacity,
       }}
     >
       <StatusBar hidden />
@@ -52,10 +58,11 @@ export default function Carousel({
             id={item.id}
             image={item.image}
             title={item.title}
+            translateY={translateY}
           />
         ))}
       </PagerView>
       <CarouselPagination currentPosition={currentPosition} totalPages={data.length} />
-    </View>
+    </Animated.View>
   );
 }
