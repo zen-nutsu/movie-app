@@ -41,6 +41,11 @@ const EachSectionMovieCard = ({
           width: '100%',
           borderRadius: 10,
         }}
+        defaultSource={
+          isWide
+            ? require('@/assets/images/placeholder-poster-wide.png')
+            : require('@/assets/images/placeholder-poster.png')
+        }
       />
       <View style={{ padding: 5, flex: 1, justifyContent: 'flex-start' }}>
         <MovieTitle title={title} />

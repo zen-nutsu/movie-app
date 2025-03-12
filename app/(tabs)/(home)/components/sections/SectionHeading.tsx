@@ -10,7 +10,7 @@ const SectionHeading = ({ text }: { text: string }) => {
     <Text
       style={{
         fontSize: width * 0.07,
-        fontWeight: 'semibold',
+        fontWeight: '600',
         color: colors.primaryTextColor(theme),
         fontFamily: 'sf-pro',
       }}
