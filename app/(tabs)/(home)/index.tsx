@@ -1,9 +1,10 @@
 import React from 'react';
-import { useColorScheme, View } from 'react-native';
+import { ScrollView, useColorScheme } from 'react-native';
 
 import colors from '@/app/global/colors';
 
 import Carousel from './components/carousel';
+import Section from './components/sections';
 
 const Home = () => {
   // TODO: This is a custom data and need to be replaced with API call
@@ -44,16 +45,59 @@ const Home = () => {
     },
   ];
 
+  // TODO: This is a custom data and need to be replaced with API call
+  const customData2 = [
+    {
+      image:
+        'https://images-cdn.ubuy.co.in/668f03f763dc6918441092c0-avengers-infinity-war-movie-poster.jpg',
+      title: 'Avenger Endgame',
+      metaInfo: '2024  •  Action',
+      id: '1',
+    },
+    {
+      image:
+        'https://lumiere-a.akamaihd.net/v1/images/p_walle_19753_69f7ff00.jpeg?region=0%2C0%2C540%2C810',
+      title: 'Wall-E',
+      metaInfo: '2024  •  Action',
+      id: '2',
+    },
+    {
+      image:
+        'https://m.media-amazon.com/images/M/MV5BMjYzYzFmOWUtMzU3Ny00MjkzLTgyYjEtYmFhMGJlZTlmZjYwXkEyXkFqcGc@._V1_.jpg',
+      title: 'Rise From Dead',
+      metaInfo: '2024  •  Action',
+      id: '3',
+    },
+    {
+      image:
+        'https://m.media-amazon.com/images/M/MV5BMmU5NGJlMzAtMGNmOC00YjJjLTgyMzUtNjAyYmE4Njg5YWMyXkEyXkFqcGc@._V1_.jpg',
+      title: 'Batman',
+      metaInfo: '2024  •  Action',
+      id: '4',
+    },
+    {
+      image:
+        'https://www.tallengestore.com/cdn/shop/products/Joker_-_Put_On_A_Happy_Face_-_Joaquin_Phoenix_-_Fan_Art_Hollywood_English_Movie_Poster_2_a6033aba-28e1-455e-bbce-71c55f5f3676.jpg?v=1579504882',
+      title: 'Joker',
+      metaInfo: '2024  •  Action',
+      id: '5',
+    },
+  ];
+
   const theme = useColorScheme();
   return (
-    <View
+    <ScrollView
       style={{
         flex: 1,
         backgroundColor: colors.backgroundColor(theme),
       }}
     >
       <Carousel data={customData} />
-    </View>
+      <Section heading="Popular" data={customData2} />
+      <Section heading="Top Rated" isWide={true} data={customData2} />
+      <Section heading="Trending" data={customData2} />
+      <Section heading="New Releases" isWide={true} data={customData2} />
+    </ScrollView>
   );
 };
 
