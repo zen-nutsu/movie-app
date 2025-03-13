@@ -110,7 +110,7 @@ const Home = () => {
         backgroundColor: colors.backgroundColor(theme),
       }}
     >
-      <Carousel data={customData} translateY={translateY} opacity={opacity} />
+      <Carousel data={customData} translateY={translateY} opacity={opacity} isLoading />
       <Section heading="Popular" data={customData2} />
       <Section heading="Top Rated" isWide={true} data={customData2} />
       <Section heading="Trending" data={customData2} />
