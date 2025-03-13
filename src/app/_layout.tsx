@@ -1,15 +1,15 @@
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import React, { useCallback } from 'react';
-import { StatusBar, useColorScheme, View } from 'react-native';
+import { StatusBar, View, useColorScheme } from 'react-native';
 
-import colors from './global/colors';
+import colors from '../global/colors';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [isLoaded] = useFonts({
-    'sf-pro': require('../assets/fonts/SF-Pro.ttf'),
+    'sf-pro': require('../../assets/fonts/SF-Pro.ttf'),
   });
 
   const theme = useColorScheme();
@@ -34,7 +34,7 @@ export default function RootLayout() {
         <Stack.Screen name="index" />
         <Stack.Screen name="(tabs)" />
       </Stack>
-      <StatusBar animated backgroundColor={colors.backgroundColor(theme)} />
+      <StatusBar hidden animated backgroundColor={colors.backgroundColor(theme)} />
     </View>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, useColorScheme } from 'react-native';
 
-import colors from '@/app/global/colors';
+import colors from '@/src/global/colors';
 
 const Search = () => {
   const theme = useColorScheme();

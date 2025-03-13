@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 
-import colors from '@/app/global/colors';
+import colors from '@/src/global/colors';
 
 import EachCategory from './EachCategory';
 

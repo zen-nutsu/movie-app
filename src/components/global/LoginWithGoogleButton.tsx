@@ -11,11 +11,11 @@ import {
   StyleProp,
   Text,
   TouchableOpacity,
-  useWindowDimensions,
   ViewStyle,
+  useWindowDimensions,
 } from 'react-native';
 
-import colors from '../global/colors';
+import colors from '../../global/colors';
 
 export default function LoginWithGoogleButton({ style }: { style?: StyleProp<ViewStyle> }) {
   GoogleSignin?.configure({
@@ -80,7 +80,7 @@ export default function LoginWithGoogleButton({ style }: { style?: StyleProp<Vie
           height: 40,
           borderRadius: 100,
         }}
-        source={require('../../assets/images/google-logo.webp')}
+        source={require('../../../assets/images/google-logo.webp')}
       />
       <Text
         style={{

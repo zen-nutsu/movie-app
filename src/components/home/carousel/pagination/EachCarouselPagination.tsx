@@ -7,7 +7,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import colors from '@/app/global/colors';
+import colors from '@/src/global/colors';
 
 const EachCarouselPagination = ({ isCurrent = false }: { isCurrent?: boolean }) => {
   const { width, height } = useWindowDimensions();

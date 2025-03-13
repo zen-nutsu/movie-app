@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import LoginWithGoogleButton from './components/LoginWithGoogleButton';
-import colors from './global/colors';
+import LoginWithGoogleButton from '../components/global/LoginWithGoogleButton';
+import colors from '../global/colors';
 
 export default function Index() {
   const theme = useColorScheme();
@@ -27,7 +27,7 @@ export default function Index() {
         style={{
           flex: 1,
         }}
-        source={require('../assets/images/login-background.jpg')}
+        source={require('../../assets/images/login-background.jpg')}
       >
         <View
           style={{
@@ -37,7 +37,7 @@ export default function Index() {
           }}
         >
           <Image
-            source={require('../assets/images/logo.png')}
+            source={require('../../assets/images/logo.png')}
             style={{
               position: 'absolute',
               top: height * 0.1,

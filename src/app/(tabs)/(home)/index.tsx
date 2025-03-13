@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
 import { Animated, useColorScheme } from 'react-native';
 
-import colors from '@/app/global/colors';
+import colors from '@/src/global/colors';
 
-import Carousel from './components/carousel';
-import Section from './components/sections';
+import { Carousel, Section } from '../../../components';
 
 const Home = () => {
   // TODO: This is a custom data and need to be replaced with API call

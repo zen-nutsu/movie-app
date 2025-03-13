@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, useWindowDimensions, View } from 'react-native';
 
-import colors from '@/app/global/colors';
+import colors from '@/src/global/colors';
 
 const EachCategory = ({ text }: { text: string }) => {
   const { width } = useWindowDimensions();

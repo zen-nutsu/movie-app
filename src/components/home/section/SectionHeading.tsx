@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, useColorScheme, useWindowDimensions } from 'react-native';
 
-import colors from '@/app/global/colors';
+import colors from '@/src/global/colors';
 
 const SectionHeading = ({ text }: { text: string }) => {
   const theme = useColorScheme();

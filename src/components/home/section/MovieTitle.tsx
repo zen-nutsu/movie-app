@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, useColorScheme, useWindowDimensions } from 'react-native';
 
-import colors from '@/app/global/colors';
+import colors from '@/src/global/colors';
 
 function MovieTitle({ title }: { title: string }) {
   const theme = useColorScheme();
