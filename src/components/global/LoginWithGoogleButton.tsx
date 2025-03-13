@@ -14,6 +14,9 @@ import {
   ViewStyle,
   useWindowDimensions,
 } from 'react-native';
+import Animated, { FadeInDown } from 'react-native-reanimated';
+
+import { CONSTANTS } from '@/src/global';
 
 import colors from '../../global/colors';
 
@@ -58,40 +61,45 @@ export default function LoginWithGoogleButton({ style }: { style?: StyleProp<Vie
   };
 
   return (
-    <TouchableOpacity
-      onPress={signIn}
-      style={{
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ...(style as any),
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: colors.white,
-        padding: 5,
-        borderRadius: 100,
-        paddingLeft: 10,
-        paddingRight: 20,
-        gap: 10,
-      }}
-    >
-      <Image
+    <Animated.View entering={FadeInDown.duration(CONSTANTS.ANIMATION_DURATION).springify()}>
+      <TouchableOpacity
+        onPress={signIn}
         style={{
-          width: 40,
-          height: 40,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          ...(style as any),
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: colors.white,
+          padding: 5,
           borderRadius: 100,
-        }}
-        source={require('../../../assets/images/google-logo.webp')}
-      />
-      <Text
-        style={{
-          fontFamily: 'sf-pro',
-          color: colors.black,
-          fontSize: width * 0.035,
-          fontWeight: 'medium',
+          paddingLeft: 10,
+          paddingRight: 20,
+          gap: 10,
+          minHeight: 50,
         }}
       >
-        Sign in with Google
-      </Text>
-    </TouchableOpacity>
+        <Image
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: 100,
+            position: 'absolute',
+            left: 10,
+          }}
+          source={require('../../../assets/images/google-logo.webp')}
+        />
+        <Text
+          style={{
+            fontFamily: 'sf-pro',
+            color: colors.black,
+            fontSize: width * 0.035,
+            fontWeight: 'medium',
+          }}
+        >
+          Sign in with Google →
+        </Text>
+      </TouchableOpacity>
+    </Animated.View>
   );
 }
