@@ -1,88 +1,65 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import {
-  Image,
-  ImageBackground,
-  Text,
-  useColorScheme,
-  useWindowDimensions,
-  View,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ImageBackground, SafeAreaView, Text, useWindowDimensions } from 'react-native';
+import Animated, { FadeInUp } from 'react-native-reanimated';
 
 import LoginWithGoogleButton from '../components/global/LoginWithGoogleButton';
+import { CONSTANTS } from '../global';
 import colors from '../global/colors';
 
 export default function Index() {
-  const theme = useColorScheme();
   const { width, height } = useWindowDimensions();
   return (
-    <SafeAreaView
+    <ImageBackground
       style={{
         flex: 1,
-        backgroundColor: colors.backgroundColor(theme),
       }}
+      source={require('../../assets/images/login-page-background.jpg')}
     >
-      <ImageBackground
+      <SafeAreaView
         style={{
           flex: 1,
         }}
-        source={require('../../assets/images/login-background.jpg')}
       >
-        <View
+        <LinearGradient
+          colors={['transparent', 'rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.8)', 'rgba(0, 0, 0, 1)']}
           style={{
             flex: 1,
-            alignItems: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            justifyContent: 'space-between',
+            width: width,
+            paddingVertical: height * 0.05,
+            paddingHorizontal: width * 0.05,
           }}
         >
-          <Image
-            source={require('../../assets/images/logo.png')}
-            style={{
-              position: 'absolute',
-              top: height * 0.1,
-              width: 100,
-              height: 100,
-              borderColor: colors.white,
-              borderWidth: 2,
-              borderRadius: 50,
-            }}
-          />
-          <LinearGradient
-            colors={['transparent', 'rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.8)', 'rgba(0, 0, 0, 1)']}
-            style={{ flex: 1, alignItems: 'center', justifyContent: 'center', width: width }}
-          >
+          <Animated.View entering={FadeInUp.duration(CONSTANTS.ANIMATION_DURATION).springify()}>
             <Text
               style={{
                 color: colors.white,
                 fontSize: width * 0.08,
-                textAlign: 'center',
                 fontFamily: 'sf-pro',
                 fontWeight: 'bold',
               }}
             >
-              Jump In & Explore
+              Sign In with your{'\n'}
+              Google account
             </Text>
             <Text
               style={{
                 color: colors.lightWhite,
                 fontSize: width * 0.05,
-                paddingRight: width * 0.05,
-                paddingLeft: width * 0.05,
-                textAlign: 'center',
                 fontFamily: 'sf-pro',
               }}
             >
-              The world of Cinema
+              To the world of Cinema
             </Text>
-            <LoginWithGoogleButton
-              style={{
-                marginTop: 20,
-              }}
-            />
-          </LinearGradient>
-        </View>
-      </ImageBackground>
-    </SafeAreaView>
+          </Animated.View>
+          <LoginWithGoogleButton
+            style={{
+              marginTop: 20,
+            }}
+          />
+        </LinearGradient>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
