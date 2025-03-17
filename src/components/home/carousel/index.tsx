@@ -1,5 +1,7 @@
+import { LinearGradient } from 'expo-linear-gradient';
+import { createShimmerPlaceHolder } from 'expo-shimmer-placeholder';
 import React, { useEffect, useRef } from 'react';
-import { Animated, StatusBar, useWindowDimensions } from 'react-native';
+import { Animated, StatusBar, useColorScheme, useWindowDimensions } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
 import { CONSTANTS, colors } from '@/src/global';
@@ -7,17 +9,22 @@ import { CONSTANTS, colors } from '@/src/global';
 import EachCarousel from './EachCarousel';
 import CarouselPagination from './pagination/CarouselPagination';
 
+const ShimmerPlaceHolder = createShimmerPlaceHolder(LinearGradient);
+
 export default function Carousel({
   data,
   translateY,
   opacity,
+  isLoading,
 }: {
   data: { title: string; description: string; image: string; id: string; categories: string[] }[];
   translateY: Animated.AnimatedInterpolation<string | number>;
   opacity: Animated.AnimatedInterpolation<string | number>;
+  isLoading?: boolean;
 }) {
-  const { height } = useWindowDimensions();
+  const { height, width } = useWindowDimensions();
   const ref = useRef(null);
+  const theme = useColorScheme();
   const [currentPosition, setCurrentPosition] = React.useState(0);
 
   useEffect(() => {
@@ -30,6 +37,17 @@ export default function Carousel({
     }, CONSTANTS.CAROUSEL_SLIDER_TRANSITION_TIME);
     return () => clearInterval(interval);
   }, [currentPosition, data.length]);
+
+  if (isLoading) {
+    return (
+      <ShimmerPlaceHolder
+        shimmerColors={[colors.backgroundColor(theme), colors.lightDark, colors.lightDark]}
+        visible={false}
+        width={width}
+        height={height * 0.55}
+      />
+    );
+  }
 
   return (
     <Animated.View
