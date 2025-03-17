@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, useColorScheme, useWindowDimensions } from 'react-native';
 
-import colors from '@/app/global/colors';
+import colors from '@/src/global/colors';
 
 const MovieMeta = ({ metaInfo }: { metaInfo: string }) => {
   const theme = useColorScheme();

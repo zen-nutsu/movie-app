@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, useColorScheme, useWindowDimensions, View } from 'react-native';
 
-import colors from '@/app/global/colors';
+import colors from '@/src/global/colors';
 
 import MovieMeta from './MovieMeta';
 import MovieTitle from './MovieTitle';

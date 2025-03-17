@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Animated, StatusBar, useWindowDimensions } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
-import colors from '@/app/global/colors';
-import constants from '@/app/global/constants';
+import { CONSTANTS, colors } from '@/src/global';
 
 import EachCarousel from './EachCarousel';
 import CarouselPagination from './pagination/CarouselPagination';
@@ -28,7 +27,7 @@ export default function Carousel({
       // @ts-ignore
       ref?.current?.setPage((currentPosition + 1) % data.length);
       setCurrentPosition(currentPosition => (currentPosition + 1) % data.length);
-    }, constants.carouselTiming);
+    }, CONSTANTS.CAROUSEL_SLIDER_TRANSITION_TIME);
     return () => clearInterval(interval);
   }, [currentPosition, data.length]);
 

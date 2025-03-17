@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, View, useColorScheme } from 'react-native';
 
-import colors from '@/app/global/colors';
+import colors from '@/src/global/colors';
 
-const Profile = () => {
+const Saved = () => {
   const theme = useColorScheme();
   return (
     <View
@@ -12,9 +12,9 @@ const Profile = () => {
         backgroundColor: colors.backgroundColor(theme),
       }}
     >
-      <Text>profile</Text>
+      <Text>saved</Text>
     </View>
   );
 };
 
-export default Profile;
+export default Saved;
