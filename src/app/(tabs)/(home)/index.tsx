@@ -1,10 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, useColorScheme, View } from 'react-native';
+import React, { useRef } from 'react';
+import { Animated, useColorScheme } from 'react-native';
 
 import colors from '@/src/global/colors';
-import { getMovies } from '@/lib/api';
-import { formatSectionMovies } from '@/lib/utils';
-import { ProcessedPopularMovie } from '@/types';
 
 import { Carousel, Section } from '../../../components';
 
@@ -64,47 +61,6 @@ const Home = () => {
     extrapolate: 'clamp',
   });
 
-  const [popularMovies, setPopularMovies] = useState<ProcessedPopularMovie[]>([]);
-  const [topRatedMovies, setTopRatedMovies] = useState<ProcessedPopularMovie[]>([]);
-  const [upcomingMovies, setUpcomingMovies] = useState<ProcessedPopularMovie[]>([]);
-  const [newReleases, setNewReleases] = useState<ProcessedPopularMovie[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);
-      const popularMovies = await getMovies('popular');
-      const topRatedMovies = await getMovies('top_rated');
-      const upcomingMovies = await getMovies('upcoming');
-      const newReleases = await getMovies('now_playing');
-      const formattedPopularMovies = await formatSectionMovies(popularMovies);
-      const formattedTopRatedMovies = await formatSectionMovies(topRatedMovies);
-      const formattedUpcomingMovies = await formatSectionMovies(upcomingMovies);
-      const formattedNewReleases = await formatSectionMovies(newReleases);
-      setPopularMovies(formattedPopularMovies);
-      setTopRatedMovies(formattedTopRatedMovies);
-      setUpcomingMovies(formattedUpcomingMovies);
-      setNewReleases(formattedNewReleases);
-      setIsLoading(false);
-    }
-    fetchData();
-  }, []);
-
-  if (isLoading) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: colors.backgroundColor(theme),
-        }}
-      >
-        <ActivityIndicator size="large" color={colors.black} />
-      </View>
-    );
-  }
-
   return (
     <Animated.ScrollView
       onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
@@ -116,10 +72,10 @@ const Home = () => {
       }}
     >
       <Carousel data={customData} translateY={translateY} opacity={opacity} />
-      {popularMovies.length > 0 && <Section heading="Popular" data={popularMovies} />}
-      <Section heading="Top Rated" isWide={true} data={topRatedMovies} />
-      <Section heading="Trending" data={upcomingMovies} />
-      <Section heading="New Releases" isWide={true} data={newReleases} />
+      <Section heading="Popular" slug="popular" />
+      <Section heading="Top Rated" isWide={true} slug="top_rated" />
+      <Section heading="Now Playing" slug="now_playing" />
+      <Section heading="Upcoming" isWide={true} slug="upcoming" />
     </Animated.ScrollView>
   );
 };

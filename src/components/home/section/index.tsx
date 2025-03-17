@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 
+import { getMovies } from '@/lib/api';
+import { formatSectionMovies } from '@/lib/utils';
 import { ProcessedPopularMovie } from '@/types';
 
 import EachMovieLoadingCard from './EachMovieLoadingCard';
@@ -10,14 +12,26 @@ import SectionHeading from './SectionHeading';
 const Section = ({
   heading,
   isWide,
-  data,
-  isLoading,
+  slug,
 }: {
   heading: string;
   isWide?: boolean;
-  isLoading?: boolean;
-  data: ProcessedPopularMovie[];
+  slug: 'top_rated' | 'popular' | 'upcoming' | 'now_playing';
 }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<ProcessedPopularMovie[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      const fetchedData = await getMovies(slug);
+      const formattedData = await formatSectionMovies(fetchedData);
+      setData(formattedData);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, [slug]);
+
   return (
     <View
       style={{
