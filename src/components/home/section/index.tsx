@@ -3,7 +3,7 @@ import { FlatList, View } from 'react-native';
 
 import { getMovies } from '@/lib/api';
 import { formatSectionMovies } from '@/lib/utils';
-import { ProcessedPopularMovie } from '@/types';
+import type { ProcessedPopularMovie } from '@/types';
 
 import EachMovieLoadingCard from './EachMovieLoadingCard';
 import EachSectionMovieCard from './EachSectionMovieCard';
@@ -59,7 +59,7 @@ const Section = ({
               key={item.id}
               id={item.id}
               image={item.image}
-              metaInfo={`${item.release_year}  •  ${item.genres[0]}`}
+              metaInfo={formatInfoWithSeparator([item.release_year, item.genres[0] || 'Unknown'])}
               title={item.title}
             />
           )
@@ -67,6 +67,14 @@ const Section = ({
       />
     </View>
   );
+};
+
+const formatInfoWithSeparator = (
+  items: (string | undefined)[],
+  separator: string = ' • '
+): string => {
+  const validItems = items.filter((item): item is string => !!item);
+  return validItems.join(separator);
 };
 
 export default Section;
