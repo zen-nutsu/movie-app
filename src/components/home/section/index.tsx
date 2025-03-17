@@ -1,6 +1,8 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 
+import { ProcessedPopularMovie } from '@/types';
+
 import EachSectionMovieCard from './EachSectionMovieCard';
 import SectionHeading from './SectionHeading';
 
@@ -11,12 +13,7 @@ const Section = ({
 }: {
   heading: string;
   isWide?: boolean;
-  data: {
-    image: string;
-    title: string;
-    metaInfo: string;
-    id: string;
-  }[];
+  data: ProcessedPopularMovie[];
 }) => {
   return (
     <View
@@ -42,7 +39,7 @@ const Section = ({
             key={item.id}
             id={item.id}
             image={item.image}
-            metaInfo={item.metaInfo}
+            metaInfo={`${item.release_year}  •  ${item.genres[0]}`}
             title={item.title}
           />
         )}

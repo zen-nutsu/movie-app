@@ -19,7 +19,7 @@ const EachSectionMovieCard = ({
   image: string;
   title: string;
   metaInfo: string;
-  id: string;
+  id: number;
 }) => {
   const { height, width } = useWindowDimensions();
   const theme = useColorScheme();

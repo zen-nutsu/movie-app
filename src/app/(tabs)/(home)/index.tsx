@@ -1,7 +1,10 @@
-import React, { useRef } from 'react';
-import { Animated, useColorScheme } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, Animated, useColorScheme, View } from 'react-native';
 
 import colors from '@/src/global/colors';
+import { getMovies } from '@/lib/api';
+import { formatSectionMovies } from '@/lib/utils';
+import { ProcessedPopularMovie } from '@/types';
 
 import { Carousel, Section } from '../../../components';
 
@@ -44,45 +47,6 @@ const Home = () => {
     },
   ];
 
-  // TODO: This is a custom data and need to be replaced with API call
-  const customData2 = [
-    {
-      image:
-        'https://images-cdn.ubuy.co.in/668f03f763dc6918441092c0-avengers-infinity-war-movie-poster.jpg',
-      title: 'Avenger Endgame',
-      metaInfo: '2024  •  Action',
-      id: '1',
-    },
-    {
-      image:
-        'https://lumiere-a.akamaihd.net/v1/images/p_walle_19753_69f7ff00.jpeg?region=0%2C0%2C540%2C810',
-      title: 'Wall-E',
-      metaInfo: '2024  •  Action',
-      id: '2',
-    },
-    {
-      image:
-        'https://m.media-amazon.com/images/M/MV5BMjYzYzFmOWUtMzU3Ny00MjkzLTgyYjEtYmFhMGJlZTlmZjYwXkEyXkFqcGc@._V1_.jpg',
-      title: 'Rise From Dead',
-      metaInfo: '2024  •  Action',
-      id: '3',
-    },
-    {
-      image:
-        'https://m.media-amazon.com/images/M/MV5BMmU5NGJlMzAtMGNmOC00YjJjLTgyMzUtNjAyYmE4Njg5YWMyXkEyXkFqcGc@._V1_.jpg',
-      title: 'Batman',
-      metaInfo: '2024  •  Action',
-      id: '4',
-    },
-    {
-      image:
-        'https://www.tallengestore.com/cdn/shop/products/Joker_-_Put_On_A_Happy_Face_-_Joaquin_Phoenix_-_Fan_Art_Hollywood_English_Movie_Poster_2_a6033aba-28e1-455e-bbce-71c55f5f3676.jpg?v=1579504882',
-      title: 'Joker',
-      metaInfo: '2024  •  Action',
-      id: '5',
-    },
-  ];
-
   const theme = useColorScheme();
   const scrollY = useRef(new Animated.Value(0)).current;
 
@@ -100,6 +64,47 @@ const Home = () => {
     extrapolate: 'clamp',
   });
 
+  const [popularMovies, setPopularMovies] = useState<ProcessedPopularMovie[]>([]);
+  const [topRatedMovies, setTopRatedMovies] = useState<ProcessedPopularMovie[]>([]);
+  const [upcomingMovies, setUpcomingMovies] = useState<ProcessedPopularMovie[]>([]);
+  const [newReleases, setNewReleases] = useState<ProcessedPopularMovie[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      const popularMovies = await getMovies('popular');
+      const topRatedMovies = await getMovies('top_rated');
+      const upcomingMovies = await getMovies('upcoming');
+      const newReleases = await getMovies('now_playing');
+      const formattedPopularMovies = await formatSectionMovies(popularMovies);
+      const formattedTopRatedMovies = await formatSectionMovies(topRatedMovies);
+      const formattedUpcomingMovies = await formatSectionMovies(upcomingMovies);
+      const formattedNewReleases = await formatSectionMovies(newReleases);
+      setPopularMovies(formattedPopularMovies);
+      setTopRatedMovies(formattedTopRatedMovies);
+      setUpcomingMovies(formattedUpcomingMovies);
+      setNewReleases(formattedNewReleases);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: colors.backgroundColor(theme),
+        }}
+      >
+        <ActivityIndicator size="large" color={colors.black} />
+      </View>
+    );
+  }
+
   return (
     <Animated.ScrollView
       onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
@@ -111,10 +116,10 @@ const Home = () => {
       }}
     >
       <Carousel data={customData} translateY={translateY} opacity={opacity} />
-      <Section heading="Popular" data={customData2} />
-      <Section heading="Top Rated" isWide={true} data={customData2} />
-      <Section heading="Trending" data={customData2} />
-      <Section heading="New Releases" isWide={true} data={customData2} />
+      {popularMovies.length > 0 && <Section heading="Popular" data={popularMovies} />}
+      <Section heading="Top Rated" isWide={true} data={topRatedMovies} />
+      <Section heading="Trending" data={upcomingMovies} />
+      <Section heading="New Releases" isWide={true} data={newReleases} />
     </Animated.ScrollView>
   );
 };
