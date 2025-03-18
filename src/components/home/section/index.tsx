@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
 import { FlatList, View } from 'react-native';
 
 import { getMovies } from '@/lib/api';
 import { formatSectionMovies } from '@/lib/utils';
-import type { ProcessedPopularMovie } from '@/types';
+import { CONSTANTS } from '@/src/global';
 
 import EachMovieLoadingCard from './EachMovieLoadingCard';
 import EachSectionMovieCard from './EachSectionMovieCard';
@@ -18,19 +19,17 @@ const Section = ({
   isWide?: boolean;
   slug: 'top_rated' | 'popular' | 'upcoming' | 'now_playing';
 }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<ProcessedPopularMovie[]>([]);
+  async function fetchMovies() {
+    const fetchedData = await getMovies(slug);
+    const formattedData = await formatSectionMovies(fetchedData);
+    return formattedData;
+  }
 
-  useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);
-      const fetchedData = await getMovies(slug);
-      const formattedData = await formatSectionMovies(fetchedData);
-      setData(formattedData);
-      setIsLoading(false);
-    }
-    fetchData();
-  }, [slug]);
+  const { data, isLoading } = useQuery({
+    queryKey: ['sectionMovies'],
+    queryFn: fetchMovies,
+    staleTime: 12 * CONSTANTS.HOURS_IN_MILLISECONDS,
+  });
 
   return (
     <View
