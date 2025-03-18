@@ -1,9 +1,12 @@
+import { useQuery } from '@tanstack/react-query';
 import { LinearGradient } from 'expo-linear-gradient';
 import { createShimmerPlaceHolder } from 'expo-shimmer-placeholder';
 import React, { useEffect, useRef } from 'react';
 import { Animated, StatusBar, useColorScheme, useWindowDimensions } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
+import { getTrending } from '@/lib/api';
+import { formatCarousalContent } from '@/lib/utils';
 import { CONSTANTS, colors } from '@/src/global';
 
 import EachCarousel from './EachCarousel';
@@ -12,20 +15,27 @@ import CarouselPagination from './pagination/CarouselPagination';
 const ShimmerPlaceHolder = createShimmerPlaceHolder(LinearGradient);
 
 export default function Carousel({
-  data,
   translateY,
   opacity,
-  isLoading,
 }: {
-  data: { title: string; description: string; image: string; id: string; categories: string[] }[];
   translateY: Animated.AnimatedInterpolation<string | number>;
   opacity: Animated.AnimatedInterpolation<string | number>;
-  isLoading?: boolean;
 }) {
   const { height, width } = useWindowDimensions();
   const ref = useRef(null);
   const theme = useColorScheme();
   const [currentPosition, setCurrentPosition] = React.useState(0);
+
+  const fetchTrending = async () => {
+    const trending = await getTrending('week', ['movie', 'tv'], 10);
+    const formattedData = formatCarousalContent(trending);
+    return formattedData;
+  };
+
+  const { data = [], isLoading } = useQuery({
+    queryKey: ['carousel'],
+    queryFn: fetchTrending,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {

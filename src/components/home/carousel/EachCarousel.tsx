@@ -78,6 +78,8 @@ const EachCarousel = ({
                 fontFamily: 'sf-pro',
                 fontWeight: 'medium',
               }}
+              numberOfLines={3}
+              ellipsizeMode="tail"
             >
               {description}
             </Text>
